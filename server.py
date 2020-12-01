@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from flask import Flask, redirect, url_for, request, render_template, flash
 from Stock import Stock
 import datetime

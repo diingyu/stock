@@ -40,7 +40,7 @@ class Stock:
         if len(self.data_list) > 0:
             return 0, "OK"
         else:
-            return 1, "sorry! no data got!"
+            return 1, "没有相关数据!"
 
     def rsv(self, c_list):  # 计算给定序列的RSV
         c_min = min(c_list)
@@ -56,12 +56,16 @@ class Stock:
         j = 3*k - 2*d
         return k, d, j
 
-    def kdj_sig(self):
-        c1 = self.get_c_list(-1)
-        k1, d1, j1 = self.kdj_cell(c1)
-        c0 = self.get_c_list()
-        k0, d0, j0 = self.kdj_cell(c0, k1, d1)
-        return k0, d0, j0
+    def kdj_sig(self, n=-1):  # n表示从过去的第几个kdj开始算，默认从上一个交易日开始
+        k = d = 50
+        for i in range(n, 1):
+            k, d, j = self.kdj_cell(self.get_c_list(i), k, d)
+            print(k,d,j)
+        # c1 = self.get_c_list(-1)
+        # k1, d1, j1 = self.kdj_cell(c1)
+        # c0 = self.get_c_list()
+        # k0, d0, j0 = self.kdj_cell(c0, k1, d1)
+        return k, d, j
 
     def get_c_list(self, end=0, n=9):  # end<=0,为计算锚点，默认当天开始，向过去取9天
         if len(self.data_list) < n-end:  # 数据不够

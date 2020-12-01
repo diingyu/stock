@@ -60,11 +60,6 @@ class Stock:
         k = d = 50
         for i in range(n, 1):
             k, d, j = self.kdj_cell(self.get_c_list(i), k, d)
-            print(k,d,j)
-        # c1 = self.get_c_list(-1)
-        # k1, d1, j1 = self.kdj_cell(c1)
-        # c0 = self.get_c_list()
-        # k0, d0, j0 = self.kdj_cell(c0, k1, d1)
         return k, d, j
 
     def get_c_list(self, end=0, n=9):  # end<=0,为计算锚点，默认当天开始，向过去取9天
